@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="Bienes Raices">
-    <title>Contacto | Bienes Raíces</title>
-    <link rel="stylesheet" href="./build/css/app.css">
-</head>
-<body>
-    
-    <header class="header">
-        <div class="contenedor contenido-header">
-            <div class="barra">
-                <a href="/"><img src="./build/img/logo.svg" alt="logo de bienes raices" class="logo"></a>
-
-                <div class="mobile-menu">
-                    <img src="build/img/barras.svg" alt="icono menu responsive">
-                </div>
-
-                <div class="derecha">
-                    <img src="build/img/dark-mode.svg" alt="Boton modo oscuro" class="dark-mode-btn">
-                    <nav class="navegacion">
-                        <a href="nosotros.html">Nosotros</a>
-                        <a href="anuncios.html">Anuncios</a>
-                        <a href="blog.html">Blog</a>
-                        <a href="contacto.html">Contacto</a>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
+<?php include 'includes/templates/header.php'; ?>
 
     <main class="contenedor seccion contenido-centrado">
         <h1>Contacto</h1>
@@ -97,20 +66,6 @@
         </form>
     </main>
 
-    <footer class="footer seccion">
-        <div class="contenedor contenedor-footer">
-            <nav class="navegacion">
-                <a href="nosotros.html">Nosotros</a>
-                <a href="anuncios.html">Anuncios</a>
-                <a href="blog.html">Blog</a>
-                <a href="contacto.html">Contacto</a>
-            </nav>
-        </div>
-
-        <p class="copyright">Todos los Derechos Reservados 2021 &copy;</p>
-    </footer>
-
-    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js' integrity='sha512-3n19xznO0ubPpSwYCRRBgHh63DrV+bdZfHK52b1esvId4GsfwStQNPJFjeQos2h3JwCmZl0/LgLxSKMAI55hgw==' crossorigin='anonymous'></script> -->
-    <script src="./build/js/bundle.min.js"></script>
-</body>
-</html>
+<?php
+    include 'includes/templates/footer.php';
+?>
