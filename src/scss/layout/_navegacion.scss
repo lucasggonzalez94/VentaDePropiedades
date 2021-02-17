@@ -29,14 +29,14 @@
     @include tablet {
         flex-direction: row;
         justify-content: space-between;
-        align-items: flex-end;
+        align-items: center;
     }
 }
 
 .navegacion {
     visibility: hidden;
     opacity: 0;
-    height: 0;
+    // height: 0;
     transition: all .3s;
     
     @include tablet {
@@ -84,5 +84,5 @@
 .mostrar {
     visibility: visible;
     opacity: 1;
-    height: auto;
+    // height: auto;
 }
