@@ -1,8 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
     eventListeners()
 
+    limpiarFormulario()
+
     darkMode()
 })
+
+function limpiarFormulario() {
+    const formulario = document.querySelector('.formulario')
+
+    if (formulario) {
+        formulario.reset()
+    }
+}
 
 function darkMode() {
 
