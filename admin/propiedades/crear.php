@@ -29,13 +29,15 @@
 
         $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
         $precio = mysqli_real_escape_string($db, $_POST['precio']);
-        $imagen = mysqli_real_escape_string($db, $_POST['imagen']);
         $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
         $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
         $wc = mysqli_real_escape_string($db, $_POST['wc']);
         $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
         $vendedorId = mysqli_real_escape_string($db, $_POST['vendedor']);
         $creado = mysqli_real_escape_string($db, date('Y/m/d'));
+
+        // Asignar files hacia una variable
+        $imagen = $_FILES['imagen'];
 
         if (!$titulo) {
             $errores[] = 'Debes añadir un titulo';
@@ -65,14 +67,40 @@
             $errores[] = 'Elige un vendedor';
         }
 
+        if (!$imagen['name'] || $imagen['error']) {
+            $errores[] = 'La imágen es obligatoria';
+        }
+
+        // Validar por tamaño
+        $medida = 1000 * 4000;
+
+        if ($imagen['size'] > $medida) {
+            $errores[] = 'La imágen es muy pesada';
+        }
+
         // echo '<pre>';
         // var_dump($errores);
         // echo '</pre>';
 
         // Revisar que el arreglo de errores este vacio
         if (empty($errores)) {
+
+            // Subida de archivos
+            // Crear carpeta
+            $carpetaImagenes = '../../imagenes/';
+
+            if (!is_dir($carpetaImagenes)) {
+                mkdir($carpetaImagenes);
+            }
+
+            // Generar un nombre unico
+            $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+            // Subir la imagen
+            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+
             // Insertar en la Base de datos
-            $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId');";
+            $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId');";
 
             $resultado = mysqli_query($db, $query);
 
@@ -98,7 +126,7 @@
             </div>
         <?php endforeach; ?>
 
-        <form action="/admin/propiedades/crear.php" method="POST" class="formulario">
+        <form action="/admin/propiedades/crear.php" method="POST" class="formulario" enctype="multipart/form-data">
             <fieldset>
                 <legend>Información General</legend>
 
