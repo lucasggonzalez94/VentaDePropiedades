@@ -47,7 +47,7 @@
             $errores[] = 'El precio es obligatorio';
         }
 
-        if (strlen(!$descripcion) < 40) {
+        if (!$descripcion || strlen($descripcion) < 40) {
             $errores[] = 'La descripción es obligatoria y debe tener al menos 40 caracteres';
         }
 
@@ -71,7 +71,7 @@
             $errores[] = 'La imágen es obligatoria';
         }
 
-        // Validar por tamaño
+        // Validar imagen por peso
         $medida = 1000 * 4000;
 
         if ($imagen['size'] > $medida) {
@@ -116,7 +116,7 @@
 ?>
 
     <main class="contenedor seccion">
-        <h1>Crear</h1>
+        <h1>Crear Propiedad</h1>
 
         <a href="/admin" class="btn btn-verde">Volver</a>
 
